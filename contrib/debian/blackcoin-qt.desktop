@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=REEC
+Comment=REEC P2P Cryptocurrency
+Comment[fr]=REEC, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=REEC, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/reec-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/bitcoin80.xpm
+MimeType=x-scheme-handler/reec;
+Categories=Office;

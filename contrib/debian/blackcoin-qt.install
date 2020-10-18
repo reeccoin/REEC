@@ -1,0 +1,5 @@
+reec-qt usr/bin
+share/pixmaps/bitcoin32.xpm usr/share/pixmaps
+share/pixmaps/bitcoin80.xpm usr/share/pixmaps
+debian/reec-qt.desktop usr/share/applications
+debian/reec-qt.protocol usr/share/kde4/services/
