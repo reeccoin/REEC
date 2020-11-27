@@ -1,0 +1,3 @@
+usr/local/bin/reeccoind usr/bin
+usr/local/bin/reeccoin-cli usr/bin
+debian/examples/reeccoin.conf etc/reeccoin

@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=REECCOIN Core
+Comment=REECCOIN Core QT test network
+GenericName=REECCOIN Digital Currency QT client testnet network
+Exec=reeccoin-core.qt-testnet %u
+Terminal=false
+Type=Application
+Icon=${SNAP}/share/pixmaps/reeccoin_testnet.png
+MimeType=x-scheme-handler/reec;
+Categories=X-Office;X-Finance;
+Keywords=internet;reeccoin;zreec;treec;core;wallet;qt;testnet;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0

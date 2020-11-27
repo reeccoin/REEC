@@ -1,0 +1,15 @@
+# http://standards.freedesktop.org/desktop-entry-spec/desktop-entry-spec-1.0.html
+
+[Desktop Entry]
+Encoding=UTF-8
+Name=REECCOIN Core Daemon SNAP
+Comment=testnet
+GenericName=REECCOIN Digital Currency Daemon Client testnet network
+Exec=reeccoin-core.daemon-testnet %u
+Terminal=true
+Type=Application
+Icon=${SNAP}/share/pixmaps/reeccoin_testnet.png
+MimeType=x-scheme-handler/reec;
+Categories=X-Office;X-Finance;
+Keywords=internet;reeccoin;zreec;core;wallet;daemon;testnet;snap;launchpad;crypto;digital;currency;coin;token;zerocoin;
+Version=1.0
