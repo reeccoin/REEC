@@ -1,4 +1,4 @@
-REECCOIN Core version *4.2.0* is now available from:  <https://github.com/reeccoin/RECC/releases>
+REECCOIN Core version *1.0.0* is now available from:  <https://github.com/reeccoin/RECC/releases>
 
 This is a new major version release, including various bug fixes and performance improvements, as well as updated translations.
 
@@ -40,13 +40,13 @@ Spending zREEC and getting zREEC balance information is no longer available in t
 
 Previous versions of REECCOIN Core had their mempool limited by checking a transaction's fees against the node's minimum relay fee. There was no upper bound on the size of the mempool and attackers could send a large number of transactions paying just slighly more than the default minimum relay fee to crash nodes with relatively low RAM.
 
-REECCOIN Core 4.2.0 will have a strict maximum size on the mempool. The default value is 300 MB and can be configured with the `-maxmempool` parameter. Whenever a transaction would cause the mempool to exceed its maximum size, the transaction that (along with in-mempool descendants) has the lowest total feerate (as a package) will be evicted and the node's effective minimum relay feerate will be increased to match this feerate plus the initial minimum relay feerate. The initial minimum relay feerate is set to 1000 satoshis per kB.
+REECCOIN Core 1.0.0 will have a strict maximum size on the mempool. The default value is 300 MB and can be configured with the `-maxmempool` parameter. Whenever a transaction would cause the mempool to exceed its maximum size, the transaction that (along with in-mempool descendants) has the lowest total feerate (as a package) will be evicted and the node's effective minimum relay feerate will be increased to match this feerate plus the initial minimum relay feerate. The initial minimum relay feerate is set to 1000 satoshis per kB.
 
-REECCOIN Core 4.2.0 also introduces new default policy limits on the length and size of unconfirmed transaction chains that are allowed in the mempool (generally limiting the length of unconfirmed chains to 25 transactions, with a total size of 101 KB). These limits can be overridden using command line arguments ([#1645](https://github.com/reeccoin/RECC/pull/1645), [#1647](https://github.com/reeccoin/RECC/pull/1647)).
+REECCOIN Core 1.0.0 also introduces new default policy limits on the length and size of unconfirmed transaction chains that are allowed in the mempool (generally limiting the length of unconfirmed chains to 25 transactions, with a total size of 101 KB). These limits can be overridden using command line arguments ([#1645](https://github.com/reeccoin/RECC/pull/1645), [#1647](https://github.com/reeccoin/RECC/pull/1647)).
 
 ### Benchmarking Framework
 
-REECCOIN Core 4.2.0 backports  the internal benchmarking framework from Bitcoin Core, which can be used to benchmark cryptographic algorithms (e.g. SHA1, SHA256, SHA512, RIPEMD160, Poly1305, ChaCha20), Base58 encoding and decoding and thread queue. More tests are needed for script validation, coin selection and coins database, cuckoo cache, p2p throughtput ([#1650](https://github.com/reeccoin/RECC/pull/1650)).
+REECCOIN Core 1.0.0 backports  the internal benchmarking framework from Bitcoin Core, which can be used to benchmark cryptographic algorithms (e.g. SHA1, SHA256, SHA512, RIPEMD160, Poly1305, ChaCha20), Base58 encoding and decoding and thread queue. More tests are needed for script validation, coin selection and coins database, cuckoo cache, p2p throughtput ([#1650](https://github.com/reeccoin/RECC/pull/1650)).
 
 The binary file is compiled with reeccoin-core, unless configured with `--disable-bench`.<br>
 After compiling reeccoin-core, the benchmarks can be run with:
@@ -146,7 +146,7 @@ and are affected by this change: RPC `getrawtransaction`, RPC `decoderawtransact
 
 - `masternodedebug`. Use `getmasternodestatus` instead. ([#1698](https://github.com/reeccoin/RECC/pull/1698)).
 
-*4.2.0* Change log
+*1.0.0* Change log
 ==============
 
 Detailed release notes follow. This overview includes changes that affect behavior, not code moves, refactors and string updates. For convenience in locating the code changes and accompanying discussion, both the pull request and git merge commit are mentioned.
