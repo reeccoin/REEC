@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[reeccoin-project-translations.qt-translation-43x]
+file_filter = src/qt/locale/reeccoin_<lang>.ts
+source_file = src/qt/locale/reeccoin_en.ts
+source_lang = en

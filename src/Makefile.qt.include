@@ -1,0 +1,723 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/reeccoin-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# reeccoin qt core #
+include Makefile.qt_locale.include
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/reeccoin/forms/loadingdialog.ui \
+  qt/reeccoin/forms/snackbar.ui \
+  qt/reeccoin/forms/navmenuwidget.ui \
+  qt/reeccoin/forms/lockunlock.ui \
+  qt/reeccoin/forms/expandablebutton.ui \
+  qt/reeccoin/forms/receivedialog.ui \
+  qt/reeccoin/forms/topbar.ui \
+  qt/reeccoin/forms/txrow.ui \
+  qt/reeccoin/forms/dashboardwidget.ui \
+  qt/reeccoin/forms/addresslabelrow.ui \
+  qt/reeccoin/forms/contactdropdownrow.ui \
+  qt/reeccoin/forms/mninfodialog.ui \
+  qt/reeccoin/forms/optionbutton.ui \
+  qt/reeccoin/forms/masternodewizarddialog.ui \
+  qt/reeccoin/forms/mnrow.ui \
+  qt/reeccoin/forms/masternodeswidget.ui \
+  qt/reeccoin/forms/myaddressrow.ui \
+  qt/reeccoin/forms/csrow.ui \
+  qt/reeccoin/forms/sendchangeaddressdialog.ui \
+  qt/reeccoin/forms/sendconfirmdialog.ui \
+  qt/reeccoin/forms/sendcustomfeedialog.ui \
+  qt/reeccoin/forms/sendchangeaddressdialog.ui \
+  qt/reeccoin/forms/sendmultirow.ui \
+  qt/reeccoin/forms/send.ui \
+  qt/reeccoin/forms/addnewaddressdialog.ui \
+  qt/reeccoin/forms/addnewcontactdialog.ui \
+  qt/reeccoin/forms/requestdialog.ui \
+  qt/reeccoin/forms/receivewidget.ui \
+  qt/reeccoin/forms/tooltipmenu.ui \
+  qt/reeccoin/forms/addresseswidget.ui \
+  qt/reeccoin/forms/defaultdialog.ui \
+  qt/reeccoin/forms/coldstakingwidget.ui \
+  qt/reeccoin/settings/forms/settingsbackupwallet.ui \
+  qt/reeccoin/settings/forms/settingsexportcsv.ui \
+  qt/reeccoin/settings/forms/settingsbittoolwidget.ui \
+  qt/reeccoin/settings/forms/settingsconsolewidget.ui \
+  qt/reeccoin/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/reeccoin/settings/forms/settingsfaqwidget.ui \
+  qt/reeccoin/settings/forms/settingsinformationwidget.ui \
+  qt/reeccoin/settings/forms/settingsmainoptionswidget.ui \
+  qt/reeccoin/settings/forms/settingsmultisenddialog.ui \
+  qt/reeccoin/settings/forms/settingsmultisendwidget.ui \
+  qt/reeccoin/settings/forms/settingssignmessagewidgets.ui \
+  qt/reeccoin/settings/forms/settingswalletoptionswidget.ui \
+  qt/reeccoin/settings/forms/settingswalletrepairwidget.ui \
+  qt/reeccoin/settings/forms/settingswidget.ui \
+  qt/reeccoin/forms/welcomecontentwidget.ui \
+  qt/reeccoin/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/reeccoin/moc_reeccoingui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/reeccoin/moc_loadingdialog.cpp \
+  qt/reeccoin/moc_pwidget.cpp \
+  qt/reeccoin/moc_focuseddialog.cpp \
+  qt/reeccoin/moc_snackbar.cpp \
+  qt/reeccoin/moc_navmenuwidget.cpp \
+  qt/reeccoin/moc_lockunlock.cpp \
+  qt/reeccoin/moc_expandablebutton.cpp \
+  qt/reeccoin/moc_furabstractlistitemdelegate.cpp \
+  qt/reeccoin/moc_receivedialog.cpp \
+  qt/reeccoin/moc_pfborderimage.cpp \
+  qt/reeccoin/moc_topbar.cpp \
+  qt/reeccoin/moc_txrow.cpp \
+  qt/reeccoin/moc_dashboardwidget.cpp \
+  qt/reeccoin/moc_addresslabelrow.cpp \
+  qt/reeccoin/moc_contactdropdownrow.cpp \
+  qt/reeccoin/moc_mninfodialog.cpp \
+  qt/reeccoin/moc_optionbutton.cpp \
+  qt/reeccoin/moc_coldstakingmodel.cpp \
+  qt/reeccoin/moc_mnmodel.cpp \
+  qt/reeccoin/moc_masternodewizarddialog.cpp \
+  qt/reeccoin/moc_mnrow.cpp \
+  qt/reeccoin/moc_masternodeswidget.cpp \
+  qt/reeccoin/moc_myaddressrow.cpp \
+  qt/reeccoin/moc_csrow.cpp \
+  qt/reeccoin/moc_contactsdropdown.cpp \
+  qt/reeccoin/moc_sendchangeaddressdialog.cpp \
+  qt/reeccoin/moc_sendconfirmdialog.cpp \
+  qt/reeccoin/moc_sendcustomfeedialog.cpp \
+  qt/reeccoin/moc_sendchangeaddressdialog.cpp \
+  qt/reeccoin/moc_sendmultirow.cpp \
+  qt/reeccoin/moc_send.cpp \
+  qt/reeccoin/moc_addnewaddressdialog.cpp \
+  qt/reeccoin/moc_addnewcontactdialog.cpp \
+  qt/reeccoin/moc_requestdialog.cpp \
+  qt/reeccoin/moc_receivewidget.cpp \
+  qt/reeccoin/moc_tooltipmenu.cpp \
+  qt/reeccoin/moc_addresseswidget.cpp \
+  qt/reeccoin/moc_defaultdialog.cpp \
+  qt/reeccoin/moc_coldstakingwidget.cpp \
+  qt/reeccoin/settings/moc_settingsbackupwallet.cpp \
+  qt/reeccoin/settings/moc_settingsexportcsv.cpp \
+  qt/reeccoin/settings/moc_settingsbittoolwidget.cpp \
+  qt/reeccoin/settings/moc_settingsconsolewidget.cpp \
+  qt/reeccoin/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/reeccoin/settings/moc_settingsfaqwidget.cpp \
+  qt/reeccoin/settings/moc_settingsinformationwidget.cpp \
+  qt/reeccoin/settings/moc_settingsmainoptionswidget.cpp \
+  qt/reeccoin/settings/moc_settingsmultisenddialog.cpp \
+  qt/reeccoin/settings/moc_settingsmultisendwidget.cpp \
+  qt/reeccoin/settings/moc_settingssignmessagewidgets.cpp \
+  qt/reeccoin/settings/moc_settingswalletoptionswidget.cpp \
+  qt/reeccoin/settings/moc_settingswalletrepairwidget.cpp \
+  qt/reeccoin/settings/moc_settingswidget.cpp \
+  qt/reeccoin/moc_welcomecontentwidget.cpp \
+  qt/reeccoin/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/reeccoin.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/reeccoin/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_reeccoin.cpp
+QT_QRC = qt/reeccoin.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_reeccoin_locale.cpp
+QT_QRC_LOCALE = qt/reeccoin_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/reeccoin/reeccoingui.h \
+  qt/bitcoinunits.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/trafficgraphwidget.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/reeccoin/prunnable.h \
+  qt/reeccoin/pfborderimage.h \
+  qt/reeccoin/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/reeccoin/pwidget.h \
+  qt/reeccoin/focuseddialog.h \
+  qt/reeccoin/guitransactionsutils.h \
+  qt/reeccoin/snackbar.h \
+  qt/reeccoin/navmenuwidget.h \
+  qt/reeccoin/lockunlock.h \
+  qt/reeccoin/receivedialog.h \
+  qt/reeccoin/furlistrow.h \
+  qt/reeccoin/furabstractlistitemdelegate.h \
+  qt/reeccoin/txviewholder.h \
+  qt/reeccoin/qtutils.h \
+  qt/reeccoin/expandablebutton.h \
+  qt/reeccoin/topbar.h \
+  qt/reeccoin/txrow.h \
+  qt/reeccoin/addressholder.h \
+  qt/reeccoin/addressfilterproxymodel.h \
+  qt/reeccoin/dashboardwidget.h \
+  qt/reeccoin/addresslabelrow.h \
+  qt/reeccoin/contactdropdownrow.h \
+  qt/reeccoin/mninfodialog.h \
+  qt/reeccoin/optionbutton.h \
+  qt/reeccoin/coldstakingmodel.h \
+  qt/reeccoin/mnmodel.h \
+  qt/reeccoin/masternodewizarddialog.h \
+  qt/reeccoin/mnrow.h \
+  qt/reeccoin/masternodeswidget.h \
+  qt/reeccoin/myaddressrow.h \
+  qt/reeccoin/csrow.h \
+  qt/reeccoin/contactsdropdown.h \
+  qt/reeccoin/sendchangeaddressdialog.h \
+  qt/reeccoin/sendconfirmdialog.h \
+  qt/reeccoin/sendcustomfeedialog.h \
+  qt/reeccoin/sendchangeaddressdialog.h \
+  qt/reeccoin/sendmultirow.h \
+  qt/reeccoin/send.h \
+  qt/reeccoin/addnewaddressdialog.h \
+  qt/reeccoin/addnewcontactdialog.h \
+  qt/reeccoin/requestdialog.h \
+  qt/reeccoin/receivewidget.h \
+  qt/reeccoin/tooltipmenu.h \
+  qt/reeccoin/addresseswidget.h \
+  qt/reeccoin/defaultdialog.h \
+  qt/reeccoin/coldstakingwidget.h \
+  qt/reeccoin/settings/settingsbackupwallet.h \
+  qt/reeccoin/settings/settingsexportcsv.h \
+  qt/reeccoin/settings/settingsbittoolwidget.h \
+  qt/reeccoin/settings/settingsconsolewidget.h \
+  qt/reeccoin/settings/settingsdisplayoptionswidget.h \
+  qt/reeccoin/settings/settingsfaqwidget.h \
+  qt/reeccoin/settings/settingsinformationwidget.h \
+  qt/reeccoin/settings/settingsmainoptionswidget.h \
+  qt/reeccoin/settings/settingsmultisenddialog.h \
+  qt/reeccoin/settings/settingsmultisendwidget.h \
+  qt/reeccoin/settings/settingssignmessagewidgets.h \
+  qt/reeccoin/settings/settingswalletoptionswidget.h \
+  qt/reeccoin/settings/settingswalletrepairwidget.h \
+  qt/reeccoin/settings/settingswidget.h \
+  qt/reeccoin/welcomecontentwidget.h \
+  qt/reeccoin/splash.h
+
+RES_ICONS = \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/reeccoin/res/img/bg-dashboard-banner.png \
+  qt/reeccoin/res/img/bg-multi-number-dark.svg \
+  qt/reeccoin/res/img/ic-check-locked.svg \
+  qt/reeccoin/res/img/ic-nav-address.svg \
+  qt/reeccoin/res/img/ic-update.svg \
+  qt/reeccoin/res/img/bg-multi-number.svg \
+  qt/reeccoin/res/img/ic-check-mint-off.svg \
+  qt/reeccoin/res/img/ic-nav-cold-staking.svg \
+  qt/reeccoin/res/img/ic-nav-cold-staking-active.svg \
+  qt/reeccoin/res/img/ic-nav-dashboard-active.svg \
+  qt/reeccoin/res/img/ic-wallet-status-locked.svg \
+  qt/reeccoin/res/img/bg-splash.svg \
+  qt/reeccoin/res/img/bg-splash.png \
+  qt/reeccoin/res/img/ic-check-mint.svg \
+  qt/reeccoin/res/img/ic-nav-dashboard-hover.svg \
+  qt/reeccoin/res/img/ic-wallet-status-staking.svg \
+  qt/reeccoin/res/img/ic-check-peers-off.svg \
+  qt/reeccoin/res/img/ic-nav-dashboard.svg \
+  qt/reeccoin/res/img/ic-wallet-status-unlocked.svg \
+  qt/reeccoin/res/img/ic-check-peers.svg \
+  qt/reeccoin/res/img/ic-nav-master-active.svg \
+  qt/reeccoin/res/img/ic-watch-password-white.svg \
+  qt/reeccoin/res/img/bg-welcome-container.jpg \
+  qt/reeccoin/res/img/bg-welcome-container.png \
+  qt/reeccoin/res/img/bg-welcome-container.svg \
+  qt/reeccoin/res/img/bg-welcome-container@2x.png \
+  qt/reeccoin/res/img/bg-welcome-container@3x.png \
+  qt/reeccoin/res/img/ic-check-staking-off.svg \
+  qt/reeccoin/res/img/ic-nav-master-hover.svg \
+  qt/reeccoin/res/img/ic-watch-password.svg \
+  qt/reeccoin/res/img/bg-welcome.jpg \
+  qt/reeccoin/res/img/bg-welcome.svg \
+  qt/reeccoin/res/img/bg-welcome@2x.jpg \
+  qt/reeccoin/res/img/bg-welcome@3x.jpg \
+  qt/reeccoin/res/img/bg-welcome.png \
+  qt/reeccoin/res/img/ic-check-staking.svg \
+  qt/reeccoin/res/img/ic-nav-master.svg \
+  qt/reeccoin/res/img/img-dashboard-banner.jpg \
+  qt/reeccoin/res/img/btn-radio-active.svg \
+  qt/reeccoin/res/img/ic-check-sync-off.svg \
+  qt/reeccoin/res/img/ic-nav-privacy-active.svg \
+  qt/reeccoin/res/img/img-empty-contacts.svg \
+  qt/reeccoin/res/img/btn-radio-off.svg \
+  qt/reeccoin/res/img/ic-check-sync.png \
+  qt/reeccoin/res/img/ic-nav-privacy-hover.svg \
+  qt/reeccoin/res/img/img-empty-dark-contacts.svg \
+  qt/reeccoin/res/img/ic-contact-arrow-down.svg \
+  qt/reeccoin/res/img/ic-contact-arrow-down-white.svg \
+  qt/reeccoin/res/img/ic-check-sync.svg \
+  qt/reeccoin/res/img/ic-check-faq.svg \
+  qt/reeccoin/res/img/ic-nav-privacy.svg \
+  qt/reeccoin/res/img/img-empty-dark-error.svg \
+  qt/reeccoin/res/img/ic-add-label.svg \
+  qt/reeccoin/res/img/ic-pending.svg \
+  qt/reeccoin/res/img/ic-check-theme-dark.svg \
+  qt/reeccoin/res/img/ic-nav-receive-active.svg \
+  qt/reeccoin/res/img/img-empty-dark-masternode.svg \
+  qt/reeccoin/res/img/ic-add-liliac.svg \
+  qt/reeccoin/res/img/ic-check-theme-light.svg \
+  qt/reeccoin/res/img/ic-nav-receive-hover.svg \
+  qt/reeccoin/res/img/img-empty-dark-multisend.svg \
+  qt/reeccoin/res/img/ic-add-purple.svg \
+  qt/reeccoin/res/img/ic-check-white.svg \
+  qt/reeccoin/res/img/ic-nav-receive.svg \
+  qt/reeccoin/res/img/img-empty-dark-peers.svg \
+  qt/reeccoin/res/img/ic-add.svg \
+  qt/reeccoin/res/img/ic-check.svg \
+  qt/reeccoin/res/img/ic-nav-send-active.svg \
+  qt/reeccoin/res/img/img-empty-dark-staking-off.svg \
+  qt/reeccoin/res/img/img-empty-dark-staking-on.svg \
+  qt/reeccoin/res/img/ic-address-book-grey.svg \
+  qt/reeccoin/res/img/ic-chevron-left.svg \
+  qt/reeccoin/res/img/ic-nav-send-hover.svg \
+  qt/reeccoin/res/img/img-empty-dark-transactions.svg \
+  qt/reeccoin/res/img/ic-address-book-white.svg \
+  qt/reeccoin/res/img/ic-chevron-right.svg \
+  qt/reeccoin/res/img/ic-nav-send.svg \
+  qt/reeccoin/res/img/img-empty-error.svg \
+  qt/reeccoin/res/img/ic-address-book.svg \
+  qt/reeccoin/res/img/ic-clear-liliac.svg \
+  qt/reeccoin/res/img/ic-nav-settings-active.svg \
+  qt/reeccoin/res/img/img-empty-masternode.svg \
+  qt/reeccoin/res/img/ic-address-send-white.svg \
+  qt/reeccoin/res/img/ic-clear-purple.svg \
+  qt/reeccoin/res/img/ic-nav-settings-hover.svg \
+  qt/reeccoin/res/img/img-empty-multisend.svg \
+  qt/reeccoin/res/img/ic-address-send.svg \
+  qt/reeccoin/res/img/ic-close-white.svg \
+  qt/reeccoin/res/img/ic-nav-settings.svg \
+  qt/reeccoin/res/img/img-empty-peers.svg \
+  qt/reeccoin/res/img/img-empty-privacy.svg \
+  qt/reeccoin/res/img/img-empty-privacy-dark.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-down-white.svg \
+  qt/reeccoin/res/img/ic-close.svg \
+  qt/reeccoin/res/img/ic-radio-liliac-on.svg \
+  qt/reeccoin/res/img/img-empty-staking-off.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-down.svg \
+  qt/reeccoin/res/img/ic-coin-reec.svg \
+  qt/reeccoin/res/img/ic-receive-off.svg \
+  qt/reeccoin/res/img/img-empty-staking-on.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-up-white.svg \
+  qt/reeccoin/res/img/ic-coin-zreec.png \
+  qt/reeccoin/res/img/ic-receive-on.svg \
+  qt/reeccoin/res/img/img-empty-transactions.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-up.svg \
+  qt/reeccoin/res/img/ic-coin-zreec.svg \
+  qt/reeccoin/res/img/ic-received.svg \
+  qt/reeccoin/res/img/img-logo-reeccoin.png \
+  qt/reeccoin/res/img/ic-arrow-drop-white-down.svg \
+  qt/reeccoin/res/img/ic-combo-box.svg \
+  qt/reeccoin/res/img/ic-send.svg \
+  qt/reeccoin/res/img/img-logo-reeccoin@2x.png \
+  qt/reeccoin/res/img/ic-arrow-purple-down.svg \
+  qt/reeccoin/res/img/ic-connect.svg \
+  qt/reeccoin/res/img/ic-submenu-lock.svg \
+  qt/reeccoin/res/img/img-logo-reeccoin@3x.png \
+  qt/reeccoin/res/img/img-logo-reeccoin.svg \
+  qt/reeccoin/res/img/ic-arrow-right-white.svg \
+  qt/reeccoin/res/img/ic-arrow-left-white.svg \
+  qt/reeccoin/res/img/ic-arrow-left.svg \
+  qt/reeccoin/res/img/ic-copy-liliac.svg \
+  qt/reeccoin/res/img/ic-submenu-staking.svg \
+  qt/reeccoin/res/img/img-nav-logo-reeccoin.png \
+  qt/reeccoin/res/img/ic-arrow-right.svg \
+  qt/reeccoin/res/img/ic-copy.svg \
+  qt/reeccoin/res/img/ic-copy-big.svg \
+  qt/reeccoin/res/img/ic-copy-big-white.svg \
+  qt/reeccoin/res/img/ic-submenu-unlock.svg \
+  qt/reeccoin/res/img/img-nav-logo.png \
+  qt/reeccoin/res/img/ic-arrow-white-left.svg \
+  qt/reeccoin/res/img/ic-exit.svg \
+  qt/reeccoin/res/img/ic-switch-liliac-on.svg \
+  qt/reeccoin/res/img/img-nav-logo.svg \
+  qt/reeccoin/res/img/ic-arrow-white-right.svg \
+  qt/reeccoin/res/img/ic-expand.svg \
+  qt/reeccoin/res/img/ic-switch-off.svg \
+  qt/reeccoin/res/img/img-qr-test-big.png \
+  qt/reeccoin/res/img/ic-check-active.svg \
+  qt/reeccoin/res/img/ic-folder.svg \
+  qt/reeccoin/res/img/ic-switch-on.svg \
+  qt/reeccoin/res/img/img-qr-test.png \
+  qt/reeccoin/res/img/ic-check-box.svg \
+  qt/reeccoin/res/img/ic-check-box-dark-active.svg \
+  qt/reeccoin/res/img/ic-check-box-indeterminate.svg \
+  qt/reeccoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/reeccoin/res/img/ic-label-liliac.svg \
+  qt/reeccoin/res/img/ic-transaction-warning.svg \
+  qt/reeccoin/res/img/ic-transaction-mint.svg \
+  qt/reeccoin/res/img/ic-transaction-mint-inactive.svg \
+  qt/reeccoin/res/img/ic-check-cold-staking.svg \
+  qt/reeccoin/res/img/ic-check-cold-staking-off.svg \
+  qt/reeccoin/res/img/ic-check-cold-staking-enabled.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/reeccoin/res/img/img-qr.svg \
+  qt/reeccoin/res/img/ic-check-connect-off.svg \
+  qt/reeccoin/res/img/ic-check-tor-off.svg \
+  qt/reeccoin/res/img/ic-check-tor.svg \
+  qt/reeccoin/res/img/ic-label.svg \
+  qt/reeccoin/res/img/ic-transaction-received.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-received.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-warning.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-mint.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/reeccoin/res/img/ic-transaction-received-inactive.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/reeccoin/res/img/img-welcome-step1.png \
+  qt/reeccoin/res/img/ic-check-connect.svg \
+  qt/reeccoin/res/img/ic-menu-hover.svg \
+  qt/reeccoin/res/img/ic-transaction-sent.svg \
+  qt/reeccoin/res/img/ic-transaction-sent-inactive.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-sent.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/reeccoin/res/img/img-welcome-step2.png \
+  qt/reeccoin/res/img/ic-check-dark.svg \
+  qt/reeccoin/res/img/ic-mint.svg \
+  qt/reeccoin/res/img/ic-transaction-staked.svg \
+  qt/reeccoin/res/img/ic-transaction-staked-inactive.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-staked.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/reeccoin/res/img/img-welcome-step3.png \
+  qt/reeccoin/res/img/ic-check-liliac-on.svg \
+  qt/reeccoin/res/img/ic-nav-address-active.svg \
+  qt/reeccoin/res/img/ic-unlock-staking.svg \
+  qt/reeccoin/res/img/img-welcome-step4.png \
+  qt/reeccoin/res/img/ic-check-locked-off.svg \
+  qt/reeccoin/res/img/ic-nav-address-hover.svg \
+  qt/reeccoin/res/img/ic-update-liliac.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-down-purple.svg \
+  qt/reeccoin/res/img/ic-arrow-drop-up-purple.svg \
+  qt/reeccoin/res/img/ic-check-liliac-indeterminate.svg \
+  qt/reeccoin/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/reeccoin/res/img/ic-transaction-stake-delegated.svg \
+  qt/reeccoin/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/reeccoin/res/img/ic-transaction-stake-hot.svg \
+  qt/reeccoin/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/reeccoin/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/reeccoin/res/img/ic-transaction-cs-contract.svg \
+  qt/reeccoin/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/reeccoin/res/img/ic-check-box-indeterminate.svg \
+  qt/reeccoin/res/img/ani-loading-dark.gif \
+  qt/reeccoin/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/reeccoin/reeccoingui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/reeccoin/loadingdialog.cpp \
+  qt/reeccoin/pwidget.cpp \
+  qt/reeccoin/focuseddialog.cpp \
+  qt/reeccoin/guitransactionsutils.cpp \
+  qt/reeccoin/snackbar.cpp \
+  qt/reeccoin/navmenuwidget.cpp \
+  qt/reeccoin/lockunlock.cpp \
+  qt/reeccoin/receivedialog.cpp \
+  qt/reeccoin/furabstractlistitemdelegate.cpp \
+  qt/reeccoin/txviewholder.cpp \
+  qt/reeccoin/qtutils.cpp \
+  qt/reeccoin/expandablebutton.cpp \
+  qt/reeccoin/topbar.cpp \
+  qt/reeccoin/txrow.cpp \
+  qt/reeccoin/addressholder.cpp \
+  qt/reeccoin/addressfilterproxymodel.cpp \
+  qt/reeccoin/dashboardwidget.cpp \
+  qt/reeccoin/addresslabelrow.cpp \
+  qt/reeccoin/contactdropdownrow.cpp \
+  qt/reeccoin/contactsdropdown.cpp \
+  qt/reeccoin/optionbutton.cpp \
+  qt/reeccoin/mninfodialog.cpp \
+  qt/reeccoin/coldstakingmodel.cpp \
+  qt/reeccoin/mnmodel.cpp \
+  qt/reeccoin/masternodewizarddialog.cpp \
+  qt/reeccoin/mnrow.cpp \
+  qt/reeccoin/masternodeswidget.cpp \
+  qt/reeccoin/myaddressrow.cpp \
+  qt/reeccoin/csrow.cpp \
+  qt/reeccoin/sendchangeaddressdialog.cpp \
+  qt/reeccoin/sendconfirmdialog.cpp \
+  qt/reeccoin/sendcustomfeedialog.cpp \
+  qt/reeccoin/sendchangeaddressdialog.cpp \
+  qt/reeccoin/sendmultirow.cpp \
+  qt/reeccoin/send.cpp \
+  qt/reeccoin/addnewaddressdialog.cpp \
+  qt/reeccoin/addnewcontactdialog.cpp \
+  qt/reeccoin/requestdialog.cpp \
+  qt/reeccoin/receivewidget.cpp \
+  qt/reeccoin/tooltipmenu.cpp \
+  qt/reeccoin/addresseswidget.cpp \
+  qt/reeccoin/defaultdialog.cpp \
+  qt/reeccoin/coldstakingwidget.cpp \
+  qt/reeccoin/settings/settingsbackupwallet.cpp \
+  qt/reeccoin/settings/settingsexportcsv.cpp \
+  qt/reeccoin/settings/settingsbittoolwidget.cpp \
+  qt/reeccoin/settings/settingsconsolewidget.cpp \
+  qt/reeccoin/settings/settingsdisplayoptionswidget.cpp \
+  qt/reeccoin/settings/settingsfaqwidget.cpp \
+  qt/reeccoin/settings/settingsinformationwidget.cpp \
+  qt/reeccoin/settings/settingsmainoptionswidget.cpp \
+  qt/reeccoin/settings/settingsmultisenddialog.cpp \
+  qt/reeccoin/settings/settingsmultisendwidget.cpp \
+  qt/reeccoin/settings/settingssignmessagewidgets.cpp \
+  qt/reeccoin/settings/settingswalletoptionswidget.cpp \
+  qt/reeccoin/settings/settingswalletrepairwidget.cpp \
+  qt/reeccoin/settings/settingswidget.cpp \
+  qt/reeccoin/welcomecontentwidget.cpp \
+  qt/reeccoin/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/reeccoin/res/css/style_dark.css \
+  qt/reeccoin/res/css/style_light.css
+
+BITCOIN_RC = qt/res/reeccoin-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms -DQT_NO_KEYWORDS
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_reeccoin_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# reeccoin-qt binary #
+qt_reeccoin_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_reeccoin_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_reeccoin_qt_SOURCES = qt/reeccoin.cpp
+if TARGET_DARWIN
+  qt_reeccoin_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_reeccoin_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_reeccoin_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_reeccoin_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_reeccoin_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_reeccoin_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBSAPLING) $(LIBRUSTZCASH) $(LIBZCASH_LIBS) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_reeccoin_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_reeccoin_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/reeccoinstrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/reeccoinstrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/reeccoin.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/reeccoin_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name reeccoin_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name reeccoin $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_reeccoin_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+reeccoin_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_reeccoin_qt_OBJECTS) qt/reeccoin-qt$(EXEEXT) $(LIBBITCOINQT)
+
+reeccoin_qt : qt/reeccoin-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@

@@ -1,0 +1,8 @@
+/usr/bin/reeccoin-cli		--	gen_context(system_u:object_r:reeccoin_exec_t,s0)
+/usr/sbin/reeccoind		--	gen_context(system_u:object_r:reeccoin_exec_t,s0)
+/usr/lib(64)?/reeccoin/reeccoind		--	gen_context(system_u:object_r:reeccoin_exec_t,s0)
+
+/etc/reeccoin(/.*)?		gen_context(system_u:object_r:reeccoin_conf_t,s0)
+/var/lib/reeccoin(/.*)?		gen_context(system_u:object_r:reeccoin_var_lib_t,s0)
+
+(/var)?/run/reeccoind(/.*)?   gen_context(system_u:object_r:reeccoin_var_run_t,s0)

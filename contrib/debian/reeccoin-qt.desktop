@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=REECCOIN Core
+Comment=REECCOIN P2P Cryptocurrency
+Comment[fr]=REECCOIN, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=REECCOIN, eşten eşe kriptografik sanal para birimi
+Exec=reeccoin-qt %u
+Terminal=false
+Type=Application
+Icon=reeccoin128
+MimeType=x-scheme-handler/reeccoin;
+Categories=Office;Finance;
+StartupWMClass=Reeccoin-qt

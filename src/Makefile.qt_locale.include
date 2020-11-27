@@ -1,0 +1,15 @@
+QT_TS = \
+  qt/locale/reeccoin_de.ts \
+  qt/locale/reeccoin_en.ts \
+  qt/locale/reeccoin_en_US.ts \
+  qt/locale/reeccoin_es.ts \
+  qt/locale/reeccoin_es_ES.ts \
+  qt/locale/reeccoin_fr_FR.ts \
+  qt/locale/reeccoin_hr_HR.ts \
+  qt/locale/reeccoin_it.ts \
+  qt/locale/reeccoin_ko_KR.ts \
+  qt/locale/reeccoin_nl.ts \
+  qt/locale/reeccoin_pl.ts \
+  qt/locale/reeccoin_ru.ts \
+  qt/locale/reeccoin_tr.ts \
+  qt/locale/reeccoin_zh_CN.ts

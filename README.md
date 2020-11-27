@@ -1,4 +1,4 @@
-Development moved to https://gitlab.com/blacknet-ninja
+# REECCOIN Core integration/staging repository
+=====================================
 
-https://reec.org/ aims to continue on REEC chain.
-# REEC
+https://reec.io/ aims to continue on REEC chain.

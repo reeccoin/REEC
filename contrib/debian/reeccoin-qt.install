@@ -1,0 +1,6 @@
+usr/local/bin/reeccoin-qt usr/bin
+share/pixmaps/reeccoin32.xpm usr/share/pixmaps
+share/pixmaps/reeccoin16.xpm usr/share/pixmaps
+share/pixmaps/reeccoin128.png usr/share/pixmaps
+debian/reeccoin-qt.desktop usr/share/applications
+debian/reeccoin-qt.protocol usr/share/kde4/services/

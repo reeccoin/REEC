@@ -1,9 +1,13 @@
-Building REEC
+Building REECCOIN
 
-See doc/readme-qt.rst for instructions on building REEC QT,
-the intended-for-end-users, nice-graphical-interface, reference
-implementation of REEC.
+Use the autogen script to prepare the build environment.
 
-See doc/build-*.txt for instructions on building reecd,
+    ./autogen.sh
+    ./configure
+    make
+
+Always verify the signatures and checksums.
+
+See doc/build-*.md for instructions on building reeccoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of REEC.
+implementation of REECCOIN.

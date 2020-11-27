@@ -1,0 +1,81 @@
+policy_module(reeccoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type reeccoin_t;
+type reeccoin_exec_t;
+init_daemon_domain(reeccoin_t, reeccoin_exec_t)
+
+permissive reeccoin_t;
+
+type reeccoin_initrc_exec_t;
+init_script_file(reeccoin_initrc_exec_t)
+
+type reeccoin_conf_t;
+files_type(reeccoin_conf_t)
+
+type reeccoin_var_lib_t;
+files_type(reeccoin_var_lib_t)
+
+type reeccoin_var_run_t;
+files_type(reeccoin_var_run_t)
+
+type reeccoin_port_t;
+corenet_port(reeccoin_port_t)
+
+########################################
+#
+# reeccoin local policy
+#
+allow reeccoin_t self:process { fork };
+
+allow reeccoin_t self:fifo_file rw_fifo_file_perms;
+allow reeccoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(reeccoin_t, reeccoin_conf_t, reeccoin_conf_t)
+manage_files_pattern(reeccoin_t, reeccoin_conf_t, reeccoin_conf_t)
+
+manage_dirs_pattern(reeccoin_t, reeccoin_var_lib_t, reeccoin_var_lib_t)
+manage_files_pattern(reeccoin_t, reeccoin_var_lib_t, reeccoin_var_lib_t)
+files_var_lib_filetrans(reeccoin_t, reeccoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(reeccoin_t, reeccoin_var_run_t, reeccoin_var_run_t)
+manage_files_pattern(reeccoin_t, reeccoin_var_run_t, reeccoin_var_run_t)
+
+sysnet_dns_name_resolve(reeccoin_t)
+corenet_all_recvfrom_unlabeled(reeccoin_t)
+
+allow reeccoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(reeccoin_t)
+corenet_tcp_sendrecv_generic_node(reeccoin_t)
+corenet_tcp_sendrecv_all_ports(reeccoin_t)
+corenet_tcp_bind_generic_node(reeccoin_t)
+
+gen_require(`
+    type reeccoin_port_t;
+')
+allow reeccoin_t reeccoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type reeccoin_port_t;
+')
+allow reeccoin_t reeccoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(reeccoin_t)
+
+files_read_etc_files(reeccoin_t)
+
+miscfiles_read_localization(reeccoin_t)
+
+sysnet_dns_name_resolve(reeccoin_t)
+
+allow reeccoin_t reeccoin_exec_t:file execute_no_trans;
+allow reeccoin_t self:process setsched;
+corecmd_exec_ls(reeccoin_t)
+corenet_tcp_connect_http_port(reeccoin_t)
+dev_read_urand(reeccoin_t)
+fs_getattr_xattr_fs(reeccoin_t)
+kernel_read_system_state(reeccoin_t)
